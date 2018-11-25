@@ -1,5 +1,5 @@
 const Mongoclient=require('mongodb').MongoClient;
-Mongoclient.connect('mongodb://localhost:27017/TodoApp',(err,db)=>{
+Mongoclient.connect('mongodb://localhost:27017/TodoApp',{ useNewUrlParser: true },(err,db)=>{
 
 if(err){
   console.log('error while connecting database');

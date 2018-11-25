@@ -1,4 +1,5 @@
 var express=require('express');
+var {ObjectId}=require('mongodb')
 //to send json to server
 var bodyparser=require('body-parser');
 
@@ -40,6 +41,28 @@ app.get('/todos',(req,res)=>{
     res.status(400).send(e);
 
   });
+
+});
+
+
+
+
+//retrieve by id
+
+app.get('/todos/:id',(req,res)=>{
+var id=req.params.id;
+if(!ObjectId.isValid(id)){
+  res.status(404).send();
+
+}
+Todo.findById(id).then((todos)=>{
+ if(!todos){
+   res.status(404).send();
+ }
+ res.send({todos })
+}).catch((e)=>{
+  res.status(400).send();
+});
 
 });
 
